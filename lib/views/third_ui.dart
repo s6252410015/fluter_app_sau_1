@@ -1,37 +1,72 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_sau1/views/third_page1_ui.dart';
+import 'package:flutter_app_sau1/views/third_page2_ui.dart';
+import 'package:flutter_app_sau1/views/third_page3_ui.dart';
+import 'package:flutter_app_sau1/views/third_page4_ui.dart';
 
-class SecondUI extends StatefulWidget {
-  const SecondUI({Key? key}) : super(key: key);
+class ThirdUI extends StatefulWidget {
+  const ThirdUI({Key? key}) : super(key: key);
 
   @override
-  _SecondUIState createState() => _SecondUIState();
+  _ThirdUIState createState() => _ThirdUIState();
 }
 
-class _SecondUIState extends State<SecondUI> {
+class _ThirdUIState extends State<ThirdUI> {
+  List page = [
+    ThirdPage1UI(),
+    ThirdPage2UI(),
+    ThirdPage3UI(),
+    ThirdPage4UI(),
+  ];
+
+  int selectIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red[300],
-        title: Text("Second UI -_-"),
+        backgroundColor: Colors.purple,
+        title: Text('Third UI  ^_^ '),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
             icon: Icon(
-              Icons.search,
+              Icons.h_mobiledata,
             ),
+            label: 'Page 1',
           ),
-          IconButton(
-            onPressed: () {},
+          BottomNavigationBarItem(
             icon: Icon(
-              Icons.exit_to_app,
-              color: Colors.grey[850],
+              Icons.g_mobiledata,
             ),
+            label: 'Page 2',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.gamepad,
+            ),
+            label: 'Page 1',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.h_mobiledata,
+            ),
+            label: 'Page 1',
           ),
         ],
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.grey[300],
+        selectedItemColor: Colors.red, 
+        currentIndex: selectIndex ,
+        onTap: (value) {
+          setState(() {
+            selectIndex = value;
+          });
+        },
       ),
+      body: page.elementAt(selectIndex),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -95,6 +130,15 @@ class _SecondUIState extends State<SecondUI> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pinkAccent[100],
+        onPressed: (){},
+        child: Icon(
+          Icons.add,
+          color:Colors.white,
+        ),
+      ),    
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat ,    
     );
   }
 }
